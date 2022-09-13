@@ -1,0 +1,5 @@
+
+ "usando o ponto .form e acionando o nome direto da classe, 
+ se so uso o nome pego todas as tags e caso use id, utilizo o # "
+
+ex: const form = document.querySelector('.form')

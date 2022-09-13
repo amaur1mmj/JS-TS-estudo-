@@ -13,4 +13,4 @@ function objts(nome, last,ok) {
 
 const obj = objts('kkkkk','jjjj','ok')
 
-console.log(obj.ok)
+console.log(obj)

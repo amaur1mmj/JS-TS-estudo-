@@ -6,6 +6,8 @@ const pessoas = ['jaum', 'pedro', 'carlim', 'ricardim'];
 
 //delete pessoas[2]; // deleta o valor referente a posição
 //slice(a,b) --  reparte passando o indice inicial e final 
+pessoas.push('aqui!!!!');
+console.log(pessoas);
 
 console.log(pessoas.slice(0,3))
 console.log(pessoas instanceof Array);
