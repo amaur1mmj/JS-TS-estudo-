@@ -68,8 +68,12 @@ body {
     background: var(--primary-active);
 }
 
-.paragrafo-resultado{
+.paragrafo-resultado, .bad{
     background: rgb(88, 253, 37);
     padding: 10px 20px;
+}
+
+.bad{
+    background: rgb(245, 29, 29);
 }
 
