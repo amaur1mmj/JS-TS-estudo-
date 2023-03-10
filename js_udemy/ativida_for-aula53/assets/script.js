@@ -32,4 +32,4 @@ container.appendChild(div);
 
 showElementos(elementos);
 
-
+//versão minha aqui, na real a do Otavio é bem mais clean e sem função extra só principal
