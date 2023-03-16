@@ -1,17 +1,23 @@
 
-function fizzBuzz(num){
-    let k = 0;
-    if(num % 3 == 0 ){
-        console.log(`Numero ${num} é divisivel por 3 = Fizz `);
-        k++;
-    }
-    if(num % 5 == 0){
-        console.log(`NUmero ${num} é divisivel por 5 = Buzz`)
-        k++;
-    }
-    return k === 2? console.log('Número é divisivel por 3 e 5 = FizzBuzz') : num;
-
+function randomsNumbers(min = 0, max = 100){
+     min = Math.ceil(min);
+     max = Math.floor(max);
+    const  aleatorio = Math.floor(Math.random() * (max));
+    return (aleatorio); 
 }
 
+function fizzBuzz(num){
+    if (typeof num != 'number') return num;
+    
+    if(num % 3 === 0 && num % 5 === 0) return 'FizzBuzz';
+    if(num % 3 === 0 ) return 'Fizz';
+    if(num % 5 === 0) return 'Buzz';
+   
+    //return k.length != 0 ? k[k.length-1] : num ;
+     return num;
+    
+    }
+//fizzBuzz(randomsNumbers())
 
-fizzBuzz(2);
+ let num = fizzBuzz(3)
+console.log(num)
