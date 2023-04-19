@@ -27,3 +27,5 @@ const c3  = a1.concat(b2)
 const c4 = [...a1,...b2, 'outrovalor' , ...[20,40,60]]
 
 console.log(c4)
+
+const vt = [1,2,5,6,7,8]
