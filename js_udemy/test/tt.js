@@ -1,12 +1,7 @@
-function greeting(name) {
-    alert('Olá ' + name);
-  }
-  
-  function processUserInput(callback) {
-    let name = 'dfsfsfdsfds'
-    callback(name);
-  }
-  
-processUserInput(greeting);
+function t(){
+  return 'batata';
+}
 
+const k = t();
+console.log(typeof(k))
 
