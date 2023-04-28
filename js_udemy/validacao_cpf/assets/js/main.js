@@ -68,10 +68,8 @@ function clearCpf(inputCpf){
 
 function checkInputCpf(input){
     if(input.length === 11) return true;
-    if(input.length >14) return false;
     return false;
 }
-
 
 
 function arrayCpf(cpfLimpo){ 
@@ -84,10 +82,14 @@ function arrayCpf(cpfLimpo){
 }
 
 function accumulatorCalcCpf(cpfArray){
+
     let cont = cpfArray.length+1; 
+    console.log(`aquiiii! ${typeof(cont)}`);
     let acumulador =  cpfArray.reduce((ac,val)=>{    
+        console.log(`${typeof(val)} valorkkkkkkkkkk`);
         ac += val* cont;
         cont--;
+        console.log(`${typeof(ac)} kkkkkkkkkk`);
         return ac; 
     },0);
 
@@ -100,30 +102,43 @@ function calcDigitoCpf(ac){
     return digit <= 9 ? digit : 0; 
 };
 
+function isSequencia(cpf){
+    const verifica = cpf[0].repeat(cpf.length);
+    console.log(verifica);
+    console.log(cpf);
+    return verifica === cpf.join("");
+}
 
 
 function ValidationCpf(cpf){
 
     let  cpfArray = arrayCpf(cpf);
-    console.log(cpfArray);
-
+    
     let ac = accumulatorCalcCpf(cpfArray.cpfArraySemDgt);
     let digito = calcDigitoCpf(ac);
-    
+
+
     const cpfParcial = [...cpfArray.cpfArraySemDgt,String(digito)];
-    
+
     ac = accumulatorCalcCpf(cpfParcial);
     digito = calcDigitoCpf(ac);
     
     const cpfFinal = [...cpfParcial,String(digito)];
     
+    if(isSequencia(cpfFinal)){ 
+        clearImage();
+        validacaoEfeito();
+        return;
+    }
+    
+    
     if(cpfFinal.join("") === cpfArray.cpfArrayCompleto.join("")) {
         clearImage();
-        validacaoEfeito('v');
-        
+        validacaoEfeito('v');        
         return cpfFinal.join("");
-};
-clearImage();
+    };
+
+    clearImage();
     validacaoEfeito();
     console.log(cpfFinal);
     console.log(cpfArray.cpfArrayCompleto);
