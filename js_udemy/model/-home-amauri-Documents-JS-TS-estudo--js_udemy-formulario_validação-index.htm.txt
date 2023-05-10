@@ -1,0 +1,3 @@
+/home/amauri/Documents/JS-TS-estudo-/js_udemy/formulario_validação/index.html
+/home/amauri/Documents/JS-TS-estudo-/js_udemy/formulario_validação/assets/css/style.css
+/home/amauri/Documents/JS-TS-estudo-/js_udemy/formulario_validação/assets/js/main.js
