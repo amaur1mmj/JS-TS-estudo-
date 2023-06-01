@@ -25,4 +25,7 @@ export default class GeraCPF{
         
         return this.formataCPF(novoCPF);
     }
-}
+  }
+
+const g = new GeraCPF();
+console.log(g)

@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+:root {
+    --primary-collor : rgb(28, 198, 204);
+    --primary-dark : rgb(3, 99, 102);
+    --primary-active : rgb(12, 152, 26);
+    --font-base : 'Roboto Condensed';
+    --font-base-2: 'Lato';
+}
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+    
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--primary-collor);
+    font-family: var(--font-base), sans-serif;
+    
+}
+
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: #ffff;
+    padding: 20px;
+}
+
+.senha-gerada{
+    margin: 20px 0;
+    text-align: center;
+    color: var(--primary-active);
+    font-size: 1.5em;
+}
+
+.menu-senha{
+    display: grid;
+    
+}
+
+.menu-senha input{
+    margin: 10px;
+}
+
+.menu-senha .submit{
+    margin: 10px;
+    width: 100px;
+    height: 30px;
+    margin: 30px 10px 21px 275px;
+    border-radius: 5px;
+}
+
+
+
+
