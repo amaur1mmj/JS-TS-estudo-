@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo</title>
+</head>
+
+<body>
+    <section class="container">
+        <h1> 
+        <%= titulo %>
+        <!--Fazendo com o sinal de -, ele executa tudo que passar em html <%- %> -->
+        </h1>
+    <form  action="/" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label >Nome</label>
+        <input type="text" name="cliente">
+        <label> Fazendo?</label>
+        <input type="text" name="fazendo">
+        <button>Submit</button>
+    </form>
+  
+
+
+    </section>
+
+    <script src="assets/js/bundle.js"></script>
+</body>
+
+</html>
