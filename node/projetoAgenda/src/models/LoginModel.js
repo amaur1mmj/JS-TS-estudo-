@@ -1,5 +1,6 @@
-const validator = require('validator')
+const validator = require('validator');
 const mongoose = require('mongoose');
+const bcryptjs = require('bcryptjs');
 
 //*exemplo de um esquema de tabela
 const LoginSchema = new mongoose.Schema({
@@ -19,11 +20,26 @@ class Login {
    async register(){
         this.valida();
         if(this.errors.length > 0) return;
+    
+       await this.userExists();
 
-       try{ 
+        if(this.errors.length > 0) return;
+
+        const salt = bcryptjs.genSaltSync();
+        this.body.password = bcryptjs.hashSync(this.body.password, salt);
+       
+       
+
         this.user = await LoginModel.create(this.body)
+        
+    }
+
+    async userExists(){
+        try{
+            const user = await LoginModel.findOne({email: this.body.email });
+            if(user) this.errors.push('Usuário já existe.');
         }catch(e){
-            console.log(e);
+            console.log(e)    
         }
     }
 

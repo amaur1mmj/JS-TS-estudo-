@@ -32,7 +32,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 //* objeto da seção 
 const sessionOptions = session({
     secret: 'sdhaluisdiansdinnaodnsaindçisaniodsnaç',
-    store: MongoStore.create({mongoUrl: process.env.CONNECTION , useUnifiedTopology: true }),
+    store: MongoStore.create({mongoUrl: process.env.CONNECTION, useUnifiedTopology: true }),
     resave: false,
     saveUninitialized: false,
     cookie:{
