@@ -1,18 +1,23 @@
 require('dotenv').config(); //* variaveis de ambiente
+const sql = require('./db');
 const express = require('express');
 const app = express();
+
+
 //* conexão com a base de dados usando variaveis do dotenv
-const mongoose = require('mongoose');
-mongoose.connect(process.env.CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=>{
-    app.emit('pronto');
-})
-.catch(e =>{console.log(e)});
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true})
+// .then(()=>{
+//     app.emit('pronto');
+// })
+// .catch(e =>{console.log(e)});
 
 //* seção 
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 //* validando a seção e criando uma tabela para manter a mesma 
 const MongoStore = require('connect-mongo');
+
 //* mensagens que expiram uma vez usadas 
 const flash = require('connect-flash');
 
@@ -32,7 +37,10 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 //* objeto da seção 
 const sessionOptions = session({
     secret: 'sdhaluisdiansdinnaodnsaindçisaniodsnaç',
-    store: MongoStore.create({mongoUrl: process.env.CONNECTION, useUnifiedTopology: true }),
+    store: new pgSession({
+        pool: sql,
+        tableName: 'user_sessions'
+    }),
     resave: false,
     saveUninitialized: false,
     cookie:{
