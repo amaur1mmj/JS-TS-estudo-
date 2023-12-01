@@ -1,5 +1,4 @@
 require('dotenv').config(); //* variaveis de ambiente
-const sql = require('./db');
 const express = require('express');
 const app = express();
 
@@ -11,12 +10,18 @@ const app = express();
 //     app.emit('pronto');
 // })
 // .catch(e =>{console.log(e)});
+const client = require('./db');
+client.connect();
+
 
 //* seção 
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
+const pool = require('./db');
+
+
 //* validando a seção e criando uma tabela para manter a mesma 
-const MongoStore = require('connect-mongo');
+//const MongoStore = require('connect-mongo');
 
 //* mensagens que expiram uma vez usadas 
 const flash = require('connect-flash');
@@ -34,19 +39,18 @@ app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
+
 //* objeto da seção 
-const sessionOptions = session({
-    secret: 'sdhaluisdiansdinnaodnsaindçisaniodsnaç',
-    store: new pgSession({
-        pool: sql,
-        tableName: 'user_sessions'
-    }),
-    resave: false,
-    saveUninitialized: false,
-    cookie:{
-        maxAge: 1000* 60* 60* 24* 7,
-        httpOnly: true
-    }
+const sessionOptions = session({    
+    store:new pgSession({
+        pool : pool,
+        tableName: 'session'                // Connection pool
+        // Insert connect-pg-simple options here
+      }),
+      secret: process.env.FOO_COOKIE_SECRET,
+      resave: false,
+      
+      cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }// 7 days
 
 });
 
@@ -58,7 +62,7 @@ app.set('views', path.resolve(__dirname, 'src','views'));
 app.set('view engine', 'ejs');
 
 app.use(csrf());
-//* middlewaew global de exemplo, ele vai inercepitar todas os eventos global.
+//* middlewaew global de exemplo, ele vai inercepitar todas os eventos global!
 app.use(middlewareGlobal);
 app.use(checkCsrfError);
 app.use(csrfMiddleware);

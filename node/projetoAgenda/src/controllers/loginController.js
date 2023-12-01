@@ -1,14 +1,16 @@
-const Login = require('../models/LoginModel');
+//const Login = require('../models/LoginModel');
+const User = require('../models/LoginModelnew');
 
 exports.index = (req, res)=>{
     res.render('login');
 };
 
 exports.register = async function(req,res){
+    console.log(req.body,"???????");
     try{
-        const login = new Login(req.body);
+        const login = new User(req.body);
         await login.register();
-        //res.send(login.errors); 
+        //console.log(login.errors.length); 
        
        if(login.errors.length > 0){  
             req.flash('errors', login.errors);

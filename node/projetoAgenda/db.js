@@ -1,17 +1,23 @@
-const postgres = require('postgres');
+const { Pool, Client} = require('pg');
 require('dotenv').config();
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-const sql = postgres({
+const client = new Client({
   host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
   port: 5432,
-  ssl: {
-    rejectUnauthorized: false, // Use isso apenas se estiver em ambiente de desenvolvimento e não estiver usando SSL seguro
-  },
+  database: PGDATABASE,
+  user: PGUSER,
+  password: PGPASSWORD,
+  
 });
 
-module.exports =  sql
+const pool = new Pool({
+  host: PGHOST,
+  user: PGDATABASE,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
+
+module.exports =  client, pool;

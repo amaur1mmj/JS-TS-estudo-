@@ -5,6 +5,7 @@ exports.middlewareGlobal = (req, res, next)=>{
 };
 
 exports.checkCsrfError = (err, req, res, next)=>{
+    console.error(err);
     if(err ) return res.render('404');
     next();
 };
