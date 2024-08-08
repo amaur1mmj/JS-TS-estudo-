@@ -4,24 +4,19 @@ const app = express();
 
 
 //* conexão com a base de dados usando variaveis do dotenv
-// const mongoose = require('mongoose');
-// mongoose.connect(process.env.CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true})
-// .then(()=>{
-//     app.emit('pronto');
-// })
-// .catch(e =>{console.log(e)});
-const client = require('./db');
-client.connect();
+ const mongoose = require('mongoose');
+ mongoose.connect(process.env.CONNECTIONDATA)
+ .then(()=>{
+     app.emit('pronto');
+ })
+ .catch(e =>{console.log(e)});
+
 
 
 //* seção 
 const session = require('express-session');
-const pgSession = require('connect-pg-simple')(session);
-const pool = require('./db');
-
-
 //* validando a seção e criando uma tabela para manter a mesma 
-//const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 
 //* mensagens que expiram uma vez usadas 
 const flash = require('connect-flash');
@@ -42,16 +37,14 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 //* objeto da seção 
 const sessionOptions = session({    
-    store:new pgSession({
-        pool : pool,
-        tableName: 'session'                // Connection pool
-        // Insert connect-pg-simple options here
-      }),
       secret: process.env.FOO_COOKIE_SECRET,
+      store: MongoStore.create({mongoUrl: process.env.CONNECTIONDATA, useUnifiedTopology: true }),
       resave: false,
-      
-      cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }// 7 days
-
+      saveUninitialized: false,
+      cookie:{
+          maxAge: 1000* 60* 60* 24* 7,
+          httpOnly: true
+      }
 });
 
 app.use(sessionOptions);
